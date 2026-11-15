@@ -87,7 +87,7 @@ If you prefer to configure services manually via the Render web UI:
      ```
    - **Start Command:**
      ```bash
-     uvicorn app.main:app --app-dir backend --host 0.0.0.0 --port $PORT
+     chmod +x start.sh && ./start.sh
      ```
    - **Health Check Path:** `/health`
    - **Plan:** `Free` or `Starter`
@@ -99,6 +99,7 @@ In the **Environment Variables** section of the Web Service, add:
 
 | Variable Name | Value / Source | Description |
 | :--- | :--- | :--- |
+| `PYTHON_VERSION` | `3.11.9` | Prevents Python 3.14 pre-release compilation issues |
 | `DATABASE_URL` | *Paste Internal Database URL from Step 1* | Render automatically handles asyncpg conversion |
 | `OPENAI_API_KEY` | `sk-proj-...` | Required for embeddings & chat completions |
 | `SECRET_KEY` | *(Click "Generate" or enter 32+ random characters)* | Cryptographic security signing |
