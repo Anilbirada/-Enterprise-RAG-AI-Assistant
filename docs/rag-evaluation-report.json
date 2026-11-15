@@ -1,0 +1,98 @@
+{
+  "timestamp": "2026-11-15T13:53:54.505446+00:00",
+  "total_samples": 5,
+  "mean_faithfulness": 1.0,
+  "mean_answer_relevance": 0.8405,
+  "mean_context_precision": 1.0,
+  "mean_context_recall": 1.0,
+  "mean_citation_accuracy": 0.9,
+  "mean_overall_score": 0.9451,
+  "mean_latency_ms": 120.0,
+  "results": [
+    {
+      "sample_id": "eval-001",
+      "query": "What is the company policy regarding remote work and VPN usage?",
+      "generated_answer": "According to company policy, All remote employees must connect via the enterprise GlobalProtect VPN with multi-factor authentication (MFA) enabled. Split tunneling is strictly prohibited on company-managed devices. [1]",
+      "faithfulness": 1.0,
+      "answer_relevance": 1.0,
+      "context_precision": 1.0,
+      "context_recall": 1.0,
+      "citation_accuracy": 1.0,
+      "overall_score": 1.0,
+      "latency_ms": 120.0,
+      "details": {
+        "department": "IT_SECURITY",
+        "contexts_retrieved": 2,
+        "citations_count": 2
+      }
+    },
+    {
+      "sample_id": "eval-002",
+      "query": "What are our customer SLA response times and uptime commitments?",
+      "generated_answer": "According to company policy, The platform guarantees 99.9% monthly service uptime. Critical Severity-1 incidents require an initial response within 15 minutes, while Severity-2 issues require response within 2 hours. [1]",
+      "faithfulness": 1.0,
+      "answer_relevance": 0.7262,
+      "context_precision": 1.0,
+      "context_recall": 1.0,
+      "citation_accuracy": 0.5,
+      "overall_score": 0.8565,
+      "latency_ms": 120.0,
+      "details": {
+        "department": "CUSTOMER_SUCCESS",
+        "contexts_retrieved": 2,
+        "citations_count": 2
+      }
+    },
+    {
+      "sample_id": "eval-003",
+      "query": "How does the engineering onboarding process work for code reviews and branch permissions?",
+      "generated_answer": "According to company policy, New engineers must submit pull requests against feature branches. Merges to the 'main' branch require at least two approving reviews from senior engineers and passing automated CI checks. [1]",
+      "faithfulness": 1.0,
+      "answer_relevance": 0.875,
+      "context_precision": 1.0,
+      "context_recall": 1.0,
+      "citation_accuracy": 1.0,
+      "overall_score": 0.9688,
+      "latency_ms": 120.0,
+      "details": {
+        "department": "ENGINEERING",
+        "contexts_retrieved": 2,
+        "citations_count": 2
+      }
+    },
+    {
+      "sample_id": "eval-004",
+      "query": "What is the data retention schedule for customer PII under GDPR compliance?",
+      "generated_answer": "According to company policy, Customer Personally Identifiable Information (PII) is retained for 30 days following formal account termination, after which it undergoes permanent cryptographic erasure. Audit logs are retained for 365 days. [1]",
+      "faithfulness": 1.0,
+      "answer_relevance": 0.7262,
+      "context_precision": 1.0,
+      "context_recall": 1.0,
+      "citation_accuracy": 1.0,
+      "overall_score": 0.9315,
+      "latency_ms": 120.0,
+      "details": {
+        "department": "LEGAL_COMPLIANCE",
+        "contexts_retrieved": 2,
+        "citations_count": 2
+      }
+    },
+    {
+      "sample_id": "eval-005",
+      "query": "What are the annual PTO accrual rates and rollover rules for full-time employees?",
+      "generated_answer": "According to company policy, Full-time employees accrue 20 days of Paid Time Off (PTO) per calendar year, accrued semi-monthly. A maximum of 5 unused PTO days can be rolled over into the subsequent calendar year. [1]",
+      "faithfulness": 1.0,
+      "answer_relevance": 0.875,
+      "context_precision": 1.0,
+      "context_recall": 1.0,
+      "citation_accuracy": 1.0,
+      "overall_score": 0.9688,
+      "latency_ms": 120.0,
+      "details": {
+        "department": "HUMAN_RESOURCES",
+        "contexts_retrieved": 2,
+        "citations_count": 2
+      }
+    }
+  ]
+}

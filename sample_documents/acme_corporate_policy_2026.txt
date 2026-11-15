@@ -1,0 +1,70 @@
+# ACME CORPORATION - ENTERPRISE OPERATIONS & SECURITY POLICY 2026
+
+Document ID: POL-2026-SEC-01
+Effective Date: January 1, 2026
+Version: 3.2
+Classification: Internal Confidential
+Target Audience: All Employees, Contractors, and Knowledge Managers
+
+---
+
+## SECTION 1: REMOTE WORK AND NETWORK ACCESS
+
+### 1.1 Mandatory VPN Utilization
+All employees, contractors, and partners accessing Acme Corporation internal services, code repositories, or production clusters from a remote location must establish an encrypted connection using the corporate GlobalProtect VPN.
+- Connection requires Multi-Factor Authentication (MFA) via hardware security key (FIDO2) or authenticator application (TOTP).
+- Direct exposure of internal endpoints to the public internet is strictly forbidden.
+
+### 1.2 Split Tunneling Restrictions
+Split tunneling is strictly disabled and prohibited on all corporate-managed endpoints. All DNS queries and IP network traffic originating from remote workstations must route through corporate perimeter inspection gateways to prevent unauthorized data exfiltration and man-in-the-middle attacks.
+
+---
+
+## SECTION 2: ENDPOINT HARDWARE SECURITY
+
+### 2.1 Disk Encryption
+Every corporate workstation, laptop, and portable storage medium containing enterprise data must have hardware-backed full-disk encryption enabled:
+- Windows systems: BitLocker with TPM 2.0 and minimum AES-256-XTS cipher.
+- macOS systems: FileVault with APFS cryptographic protection.
+
+### 2.2 Screen Lock & Session Inactivity
+Workstations must be configured to automatically lock displays after five (5) minutes of inactivity. Leaving unattended machines unlocked in shared or public workspaces is a Tier-2 security compliance violation.
+
+---
+
+## SECTION 3: SERVICE LEVEL AGREEMENTS (SLA) & UPTIME COMMITMENTS
+
+Acme Corporation guarantees a 99.9% monthly service uptime for all Tier-1 cloud production services.
+
+### 3.1 Incident Response Targets:
+- Severity 1 (Critical Outage / Platform Down):
+  * Initial acknowledgement: Within 15 minutes.
+  * Status updates: Every 30 minutes until mitigation.
+  * Root Cause Analysis (RCA): Published within 72 hours.
+- Severity 2 (Major Service Impairment):
+  * Initial acknowledgement: Within 2 hours.
+  * Status updates: Every 4 hours.
+- Severity 3 (Minor Bug / Cosmetic Issue):
+  * Initial acknowledgement: Within 24 business hours.
+
+---
+
+## SECTION 4: EMPLOYEE LEAVE & PTO ACCRUAL
+
+### 4.1 Annual Paid Time Off (PTO)
+Regular full-time employees accrue 20 days (160 hours) of Paid Time Off (PTO) per calendar year.
+- PTO accrues pro-rata semi-monthly on the 1st and 15th day of each active service month.
+- Employees can request PTO via the internal HR portal with at least two (2) weeks advance notice for planned absences exceeding three consecutive working days.
+
+### 4.2 PTO Rollover Policy
+Employees are entitled to roll over a maximum of five (5) unused PTO days into the following calendar year. Any additional accrued but unutilized days above the 5-day cap expire on December 31st without cash compensation, except where prohibited by applicable local labor laws.
+
+---
+
+## SECTION 5: DATA RETENTION & PRIVACY COMPLIANCE (GDPR & SOC 2)
+
+### 5.1 Customer PII Deletion Schedule
+In compliance with GDPR Article 17 ("Right to Erasure") and SOC 2 Type II audit criteria, customer Personally Identifiable Information (PII) is scheduled for permanent cryptographic deletion thirty (30) calendar days after formal account termination.
+
+### 5.2 Audit Logging & Immutability
+All security audit logs, authentication records, and administrative access event trails are preserved in write-once-read-many (WORM) cloud object storage for a mandatory duration of 365 calendar days before automated lifecycle purging.
