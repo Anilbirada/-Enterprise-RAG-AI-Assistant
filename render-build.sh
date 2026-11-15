@@ -4,7 +4,8 @@
 set -e
 
 echo "=== [1/4] Installing Python Backend Dependencies ==="
-python -m pip install --upgrade pip
+python --version
+python -m pip install --upgrade pip setuptools wheel
 pip install -r backend/requirements.txt
 
 echo "=== [2/4] Compiling React SPA Frontend ==="
