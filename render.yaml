@@ -1,0 +1,68 @@
+# ==============================================================================
+# Render Blueprint Specification (Infrastructure-as-Code)
+# Enterprise RAG AI Assistant - Multi-Tenant RAG Platform
+# ==============================================================================
+# Docs: https://render.com/docs/blueprint-spec
+
+services:
+  # ----------------------------------------------------------------------------
+  # Full-Stack Web Service (FastAPI API + React SPA Unified Deployment)
+  # ----------------------------------------------------------------------------
+  - type: web
+    name: enterprise-rag-ai-assistant
+    runtime: python
+    region: oregon
+    plan: free # Change to starter/standard for dedicated production resources
+    autoDeploy: true
+    buildCommand: "chmod +x render-build.sh && ./render-build.sh"
+    startCommand: "uvicorn app.main:app --app-dir backend --host 0.0.0.0 --port $PORT"
+    healthCheckPath: /health
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: DEBUG
+        value: false
+      - key: LOG_LEVEL
+        value: INFO
+      - key: LOG_FORMAT
+        value: json
+      - key: DATABASE_URL
+        fromDatabase:
+          name: enterprise-rag-db
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: JWT_SECRET_KEY
+        generateValue: true
+      - key: JWT_ALGORITHM
+        value: HS256
+      - key: JWT_ISSUER
+        value: enterprise-rag-api
+      - key: JWT_AUDIENCE
+        value: enterprise-rag-client
+      - key: ACCESS_TOKEN_EXPIRE_MINUTES
+        value: 30
+      - key: REFRESH_TOKEN_EXPIRE_DAYS
+        value: 7
+      - key: STORAGE_PROVIDER
+        value: local
+      - key: CORS_ORIGINS
+        value: "*"
+      # User must supply their OpenAI API key in the Render Dashboard
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: EMBEDDING_MODEL
+        value: text-embedding-3-small
+      - key: LLM_MODEL
+        value: gpt-4o-mini
+
+databases:
+  # ----------------------------------------------------------------------------
+  # Managed PostgreSQL with pgvector Support
+  # ----------------------------------------------------------------------------
+  - name: enterprise-rag-db
+    databaseName: enterprise_rag
+    user: postgres
+    region: oregon
+    plan: free # Change to starter/standard for non-expiring production storage
+    postgresMajorVersion: 16

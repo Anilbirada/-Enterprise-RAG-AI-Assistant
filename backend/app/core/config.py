@@ -79,6 +79,8 @@ class Settings(BaseSettings):
     POSTGRES_DB: str = "enterprise_rag_db"
     
     # Optional direct URIs (default built dynamically if absent)
+    # Render and other PaaS inject DATABASE_URL automatically
+    DATABASE_URL: str | None = None
     POSTGRES_ASYNC_URI: str | None = None
     POSTGRES_SYNC_URI: str | None = None
 
@@ -91,8 +93,15 @@ class Settings(BaseSettings):
     @property
     def async_database_url(self) -> str:
         """Returns the async database URI for SQLAlchemy + asyncpg."""
-        if self.POSTGRES_ASYNC_URI:
-            return self.POSTGRES_ASYNC_URI
+        uri = self.POSTGRES_ASYNC_URI or self.DATABASE_URL
+        if uri:
+            if uri.startswith("postgres://"):
+                uri = uri.replace("postgres://", "postgresql+asyncpg://", 1)
+            elif uri.startswith("postgresql://"):
+                uri = uri.replace("postgresql://", "postgresql+asyncpg://", 1)
+            elif uri.startswith("postgresql+psycopg2://"):
+                uri = uri.replace("postgresql+psycopg2://", "postgresql+asyncpg://", 1)
+            return uri
         return (
             f"postgresql+asyncpg://{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}@"
             f"{self.POSTGRES_SERVER}:{self.POSTGRES_PORT}/{self.POSTGRES_DB}"
@@ -101,8 +110,15 @@ class Settings(BaseSettings):
     @property
     def sync_database_url(self) -> str:
         """Returns the sync database URI for Alembic migrations."""
-        if self.POSTGRES_SYNC_URI:
-            return self.POSTGRES_SYNC_URI
+        uri = self.POSTGRES_SYNC_URI or self.DATABASE_URL
+        if uri:
+            if uri.startswith("postgres://"):
+                uri = uri.replace("postgres://", "postgresql+psycopg2://", 1)
+            elif uri.startswith("postgresql+asyncpg://"):
+                uri = uri.replace("postgresql+asyncpg://", "postgresql+psycopg2://", 1)
+            elif uri.startswith("postgresql://"):
+                uri = uri.replace("postgresql://", "postgresql+psycopg2://", 1)
+            return uri
         return (
             f"postgresql+psycopg2://{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}@"
             f"{self.POSTGRES_SERVER}:{self.POSTGRES_PORT}/{self.POSTGRES_DB}"

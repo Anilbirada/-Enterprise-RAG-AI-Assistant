@@ -288,7 +288,24 @@ npm run dev
 
 ---
 
-## 8. Demo Accounts
+## 8. Deploy to Render (Cloud Deployment)
+
+The repository includes a production-ready Render Blueprint (`render.yaml`), Dockerfile, and build script (`render-build.sh`) for seamless single-click cloud deployment:
+
+- **Unified Full-Stack Web Service**: FastAPI backend serving both API routes (`/api/v1/*`) and the compiled React 18 SPA (`/`) with client-side routing fallback. Zero CORS issues.
+- **Managed PostgreSQL with pgvector**: Automated `alembic upgrade head` enabling vector extension and tables, with idempotent demo account seeding.
+
+### 1-Click Blueprint Steps:
+1. Log in to [Render Dashboard](https://dashboard.render.com) and click **"New +"** -> **"Blueprint"**.
+2. Connect your GitHub repository: `https://github.com/Anilbirada/-Enterprise-RAG-AI-Assistant`.
+3. Provide your `OPENAI_API_KEY` when prompted.
+4. Click **"Apply"**. Render handles the rest!
+
+📖 For detailed step-by-step instructions and manual setup, read the **[Render Deployment Guide](docs/render_deployment.md)**.
+
+---
+
+## 9. Demo Accounts
 
 The database seed script generates pre-configured multi-tier test accounts:
 
@@ -302,7 +319,7 @@ The database seed script generates pre-configured multi-tier test accounts:
 
 ---
 
-## 9. Testing & Validation
+## 10. Testing & Validation
 
 The test suite contains **151 automated tests** covering database schemas, RLS isolation, JWT rotation, document extraction, vector indexing, hybrid search, RAG streaming, and evaluation metrics:
 
@@ -319,7 +336,7 @@ TOTAL Code Coverage: 86%
 
 ---
 
-## 10. Automated RAG Evaluation Benchmark
+## 11. Automated RAG Evaluation Benchmark
 
 The system includes a built-in evaluation harness measuring retrieval and synthesis performance against a golden multi-domain enterprise dataset:
 
@@ -340,7 +357,7 @@ python -m app.evaluation.cli --output docs/rag-evaluation-report.md
 
 ---
 
-## 11. Security & Governance
+## 12. Security & Governance
 
 1. **Database Row Level Security (RLS)**:
    Every table is secured with PostgreSQL RLS policies (`CREATE POLICY tenant_isolation_policy ON ... USING (organization_id = CURRENT_SETTING('app.current_tenant_id')::UUID)`). Direct queries cannot leak cross-tenant rows even in the presence of SQL injection.
@@ -353,12 +370,13 @@ python -m app.evaluation.cli --output docs/rag-evaluation-report.md
 
 ---
 
-## 12. Documentation References
+## 13. Documentation References
 
 - [System Architecture](architecture.md)
 - [Database Schema & ER Design](database-design.md)
 - [REST API Specifications](docs/api_documentation.md)
 - [Installation & Local Setup](docs/installation_guide.md)
+- [Render Cloud Deployment Guide](docs/render_deployment.md)
 - [Authentication & JWT Lifecycle](docs/authentication.md)
 - [Enterprise Security & RBAC](docs/security.md)
 - [Document Upload & Ingestion](docs/document-upload.md)
@@ -374,7 +392,7 @@ python -m app.evaluation.cli --output docs/rag-evaluation-report.md
 
 ---
 
-## 13. Contributing & License
+## 14. Contributing & License
 
 Contributions are welcome! Please read [CONTRIBUTING.md](CONTRIBUTING.md) for pull request guidelines and coding standards.
 

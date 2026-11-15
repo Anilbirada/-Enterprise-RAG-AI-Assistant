@@ -13,8 +13,17 @@ from app.models.user import User
 from app.core.security import get_password_hash
 
 
+from sqlalchemy import select
+
 async def seed():
     async with AsyncSessionLocal() as session:
+        # Check if already seeded
+        result = await session.execute(select(User).filter_by(email="admin@acme.com"))
+        existing_user = result.scalar_one_or_none()
+        if existing_user:
+            print("[INFO] Seed data already exists in database. Skipping seed step.")
+            return
+
         # Create Organization
         org = Organization(
             id=uuid.uuid4(),
